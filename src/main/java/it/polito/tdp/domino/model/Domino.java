@@ -8,6 +8,7 @@ public class Domino {
 		List<Integer> parziale= new LinkedList<>();
 		List<String> controllo= new LinkedList<>();
 		this.creaSequenza(parziale, 0, controllo);
+		
 	}
 	
 	private void creaSequenza(List<Integer> parziale, int livello, List<String> controllo) {
@@ -24,14 +25,15 @@ public class Domino {
 						 n++;
 					
 				}
-				if(livello==0) {
+				if(parziale.size()==0) {
 					List<Integer> nuovaParziale= new LinkedList<>(parziale);
 					nuovaParziale.add(i);
 					creaSequenza(nuovaParziale, livello+1, controllo);
-					
 				}
-				if(n<5) {
 					
+				
+				if(n<5 && parziale.size()>0) {
+
 					if(parziale.size()%2==0 && parziale.get(livello-1)==i) {
 					   List<String> nuovoControllo= new LinkedList<>(controllo);
 					   nuovoControllo.add(""+parziale.get(livello-1)+parziale.get(livello-2));
@@ -42,12 +44,13 @@ public class Domino {
 					   creaSequenza(nuovaParziale, livello+1, nuovoControllo);
 					   
 					 }
-					if(parziale.size()%2!=0 && parziale.get(livello-1)!=i && !controllo.contains(""+parziale.get(livello-1)+i)) {
+					if( parziale.size()%2!=0 && parziale.get(livello-1)!=i && !controllo.contains(""+parziale.get(livello-1)+i)) {
 					   List<Integer> nuovaParziale= new LinkedList<>(parziale);
 					   nuovaParziale.add(i);
 					   creaSequenza(nuovaParziale, livello+1, controllo);
 					
 					}
+					
 				}
 				
 				
